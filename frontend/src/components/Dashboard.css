@@ -1,0 +1,235 @@
+/* Reset */
+/* Reset with Enhanced Background */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top left, #f0f9ff, #e0f2fe, #f3f4f6);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #111827;
+}
+
+/* Dashboard Container */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #111827;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-right: 3rem;
+  color: #3b82f6;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.nav-links li:hover {
+  color: #60a5fa;
+}
+
+/* Main Content */
+.main-content {
+  padding-top: 10rem; /* Increased from 6rem to 8rem */
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+
+.dashboard-header {
+  position: relative;
+  z-index: 1;
+}
+
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+
+.dashboard-header p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  flex: 1 1 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  border-left: 5px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  /* background-color: #f9fafb; */
+  border-left: 5px solid #3b82f6;
+}
+
+.card p {
+  font-size: 1.8rem;
+  color: #1f2937;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Chart Section */
+.chart-section {
+  margin-top: 4rem;
+}
+
+.chart-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.chart-placeholder {
+  background-color: #ffffff;
+  border: 2px dashed #9ca3af;
+  padding: 3rem;
+  border-radius: 1rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+
+  .navbar-left,
+  .navbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Card Styles */
+.card {
+  position: relative;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  flex: 1 1 250px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease, color 0.4s ease;
+  overflow: hidden;
+  z-index: 1;
+  border-left: 5px solid transparent;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  transition: color 0.3s ease;
+}
+
+.card p {
+  font-size: 1.9rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #111827;
+  transition: color 0.3s ease;
+}
+
+/* Gradient Border Glow */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(130deg, #3b82f6, #6366f1, #06b6d4);
+  z-index: -1;
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(8px);
+}
+
+/* Hover State */
+.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(to bottom right, #1e3a8a, #2563eb); /* Darker for contrast */
+  border-left: 5px solid #3b82f6;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover h3,
+.card:hover p {
+  color: #ffffff;
+}
+
+.chart-container {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
