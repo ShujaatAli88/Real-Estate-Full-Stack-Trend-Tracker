@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Dashboard.css';
-import { FaHome, FaChartLine, FaUserCircle } from 'react-icons/fa';
+import { FaHome, FaChartLine, FaUserCircle, FaDatabase, FaSpider, FaAppStore, FaSignOutAlt, FaUserAstronaut, FaUserGraduate, FaPersonBooth, FaVoicemail, FaMailBulk, FaGem } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext'; // Adjust path if needed
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Area, Legend
@@ -10,6 +12,34 @@ const Dashboard = () => {
   const [avgPrice, setAvgPrice] = useState(null);
   const [totalListings, setTotalListings] = useState(null);
   const [priceTrends, setPriceTrends] = useState([]);
+  const [showProfilePopup, setShowProfilePopup] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
+
+  const handleScrapedData = () => {
+    navigate('/scraped-data');
+  };
+
+  const handleRunCrawler = () => {
+    navigate('/logs');
+  };
+
+  const handleLogout = () => {
+    logout(); // Update auth state
+    navigate('/'); // Redirect to login
+  };
+
+  useEffect(() => {
+    // Simulated user data — replace with real API call if needed
+    const mockUserData = {
+      name: "Shujaat Ali",
+      email: "shujaatalee888@gmail.com",
+      age: 30
+    };
+    setUserData(mockUserData);
+  }, []);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/price-trends')
@@ -39,15 +69,17 @@ const Dashboard = () => {
       {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-left">
-          <span className="logo">🏠 Zillow.com Tracker PRO</span>
+          <span className="logo"><FaAppStore /> Zillow.com Tracker PRO</span>
           <ul className="nav-links">
-            <li><FaHome /> Properties</li>
-            <li><FaChartLine /> Market Trends</li>
+            <li onClick={handleScrapedData}><FaDatabase /> Scraped Data</li>
+            <button className="run-crawler-btn" onClick={handleRunCrawler}>
+              <li><FaSpider /> Run Crawler</li>
+            </button>
           </ul>
         </div>
         <div className="navbar-right">
           <ul className="nav-links">
-            <li><FaUserCircle /> Profile</li>
+            <li onClick={() => setShowProfilePopup(true)}><FaUserCircle /> Profile</li>
           </ul>
         </div>
       </nav>
@@ -67,10 +99,10 @@ const Dashboard = () => {
           </div>
           <div className="card highlight-card">
             <h3>🆕 New Listings This Week</h3>
-            <p>87</p> {/* You can make this dynamic later */}
+            <p>87</p>
           </div>
           <div className="card highlight-card">
-            <h3>💲Avg. Price</h3>
+            <h3>💲 Avg. Price</h3>
             <p>{avgPrice !== null ? `$${avgPrice.toLocaleString()}` : 'Loading...'}</p>
           </div>
         </section>
@@ -126,6 +158,28 @@ const Dashboard = () => {
           </div>
         </section>
       </main>
+
+      {/* Profile Popup Modal */}
+      {showProfilePopup && (
+        <div className="profile-modal-overlay">
+          <div className="profile-modal">
+            <button className="profile-modal-close" onClick={() => setShowProfilePopup(false)}>×</button>
+            <h3><FaUserGraduate/> My Info</h3>
+            {userData ? (
+              <>
+                <p><strong><FaUserCircle/> :</strong> {userData.name}</p>
+                <p><strong><FaMailBulk/> :</strong> {userData.email}</p>
+                <p><strong><FaGem/> Age:</strong> {userData.age}</p>
+                <button className="profile-logout-btn" onClick={handleLogout}>
+                  <FaSignOutAlt /> Logout
+                </button>
+              </>
+            ) : (
+              <p>Loading user info...</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
