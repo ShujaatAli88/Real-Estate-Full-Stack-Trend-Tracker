@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
+import { AuthContext } from './AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // React Router v6+
+  const navigate = useNavigate();
+
+  const { login } = useContext(AuthContext); // Use the context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +18,7 @@ const Login = () => {
       const res = await axios.post('http://localhost:5000/login', { email, password });
 
       if (res.status === 200) {
-        // Navigate to dashboard on successful login
+        login(); // Update auth state
         navigate('/dashboard');
       }
     } catch (err) {

@@ -1,0 +1,92 @@
+/* Base screen setup */
+.logs-screen {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Central container with fixed width */
+.logs-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Header: title + buttons */
+.logs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.logs-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Button grouping */
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Buttons shared */
+.back-button,
+.stop-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific styles */
+.back-button {
+  background-color: #007bff;
+  color: #fff;
+}
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.stop-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+.stop-button:hover {
+  background-color: #c82333;
+}
+
+/* Logs box styles */
+.logs-box {
+  height: 65vh;
+  padding: 1.5rem;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 10px;
+  overflow-y: auto;
+  border: 1px solid #333;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Each log line */
+.log-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
